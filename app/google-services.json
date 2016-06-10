@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "698358324605",
+    "firebase_url": "https://hollischeng-1188.firebaseio.com",
+    "project_id": "hollischeng-1188",
+    "storage_bucket": "hollischeng-1188.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:698358324605:android:25e7db2d11dd44c9",
+        "android_client_info": {
+          "package_name": "google.hollischeng.com.googleapi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "698358324605-m2fgqfj6sg17aqcmn63movarolc8dm4m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "google.hollischeng.com.googleapi",
+            "certificate_hash": "64DE78071E9258762516EE48F8C4EC3562FDF1F6"
+          }
+        },
+        {
+          "client_id": "698358324605-734tm5qqovb80bdt2i2g5q5dnqibveu7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdL-fFm4waA0YaR7akd7HER9a5F5itXaY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "698358324605-734tm5qqovb80bdt2i2g5q5dnqibveu7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
