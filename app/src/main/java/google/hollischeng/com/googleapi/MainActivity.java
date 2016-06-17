@@ -12,6 +12,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.NativeExpressAdView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MobileAds.initialize(this, getString(R.string.application_id_code));
 
         BtnMap = (Button) findViewById(R.id.BtnMap);
         BtnPlay = (Button) findViewById(R.id.BtnPlay);
@@ -42,33 +45,24 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        MobileAds.initialize(this, "ca-app-pub-8962617645609354~9554936427");
-
         mInterstitialAd = newInterstitialAd();
 
         requestNewInterstitial();
 
-
-        // Gets the ad view defined in layout/ad_fragment.xml with ad unit ID set in
-        // values/strings.xml.
         mAdView = (AdView) findViewById(R.id.ad_view);
 
-        // Create an ad request. Check your logcat output for the hashed device ID to
-        // get test ads on a physical device. e.g.
-        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
+        AdRequest adRequest = new AdRequest.Builder().build();
 
-        // Start loading the ad in the background.
         mAdView.loadAd(adRequest);
+
+        NativeExpressAdView adView = (NativeExpressAdView) findViewById(R.id.adView);
+        if (adView != null) {
+            adView.loadAd(new AdRequest.Builder().build());
+        }
     }
 
-
     private void requestNewInterstitial() {
-        AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .build();
+        AdRequest adRequest = new AdRequest.Builder().build();
 
         mInterstitialAd.loadAd(adRequest);
     }
@@ -80,11 +74,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void play() {
-
+        Log.e("MA", "Play");
         if (mInterstitialAd != null && mInterstitialAd.isLoaded()) {
+            Log.e("MA", "Ad show");
             mInterstitialAd.show();
         } else {
-            Log.e("MA", "Play");
+            Log.e("MA", "requestNewInterstitial");
             mInterstitialAd = newInterstitialAd();
             requestNewInterstitial();
         }
@@ -97,17 +92,69 @@ public class MainActivity extends AppCompatActivity {
         interstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
+                Log.e("MA", "onAdLoaded");
             }
 
             @Override
             public void onAdFailedToLoad(int errorCode) {
+                Log.e("MA", "onAdFailedToLoad");
             }
 
             @Override
             public void onAdClosed() {
+                Log.e("MA", "onAdClosed");
                 play();
             }
+
+            @Override
+            public void onAdLeftApplication() {
+                Log.e("MA", "onAdLeftApplication");
+                super.onAdLeftApplication();
+            }
+
+            @Override
+            public void onAdOpened() {
+                Log.e("MA", "onAdOpened");
+                super.onAdOpened();
+            }
+
         });
         return interstitialAd;
+    }
+
+    /**
+     * Called when leaving the activity
+     */
+    @Override
+    public void onPause() {
+        Log.e("MA", "onPause");
+        if (mAdView != null) {
+            mAdView.pause();
+        }
+        super.onPause();
+    }
+
+    /**
+     * Called when returning to the activity
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("MA", "onResume");
+        if (mAdView != null) {
+            mAdView.resume();
+        }
+    }
+
+    /**
+     * Called before the activity is destroyed
+     */
+    @Override
+    public void onDestroy() {
+        Log.e("MA", "onDestroy");
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+        super.onDestroy();
     }
 }

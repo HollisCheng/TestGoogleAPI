@@ -51,10 +51,11 @@
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:theme="@android:style/Theme.Translucent" />
+            android:theme="@android:style/Theme.Translucent"
+            android:noHistory="true"/>
         <activity
             android:name=".InterstitialAdActivity"
-            android:label="@string/title_activity_interstitial_ad"></activity>
+            android:label="@string/title_activity_interstitial_ad"/>
     </application>
 
 </manifest>

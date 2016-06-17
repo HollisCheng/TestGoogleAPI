@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -81,16 +82,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void getCurrentLocation() {
-// Instantiates a new Polyline object and adds points to define a rectangle
-//        PolylineOptions rectOptions = new PolylineOptions()
-//                .add(new LatLng(22.2179, 114.2134))
-//                .add(new LatLng(22.3, 114.7))  // North of the previous point, but at the same longitude
-//                .add(new LatLng(22.2379, 114.2334))  // Same latitude, and 30km to the west
-//                .add(new LatLng(22.8, 114.9))// Same longitude, and 16km to the south
-//                .add(new LatLng(22.2579, 114.2534)); // Closes the polyline.
-
-// Get back the mutable Polyline
-//        Polyline polyline = mMap.addPolyline(rectOptions);
         Polyline line = mMap.addPolyline(new PolylineOptions()
                 .add(new LatLng(22.2179, 114.2134),
                         new LatLng(22.3, 114.7),
@@ -111,5 +102,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Toast.makeText(this, "Unable to fetch the current location", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private void createLocationRequest() {
+        LocationRequest mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(5000);
+//        mLocationRequest.setFastestInterval(5000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
 }

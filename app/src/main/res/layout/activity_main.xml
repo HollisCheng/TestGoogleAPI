@@ -9,7 +9,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="google.hollischeng.com.googleapi.MainActivity">
+    tools:context="google.hollischeng.com.googleapi.MainActivity"
+    tools:ignore="MergeRootFrame">
 
     <Button
         android:id="@+id/BtnMap"
@@ -29,4 +30,14 @@
         android:layout_height="wrap_content"
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_unit_id" />
+
+    <com.google.android.gms.ads.NativeExpressAdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        ads:adSize="280x250"
+        ads:adUnitId="@string/native_ad_unit_id">
+    </com.google.android.gms.ads.NativeExpressAdView>
+
 </LinearLayout>
